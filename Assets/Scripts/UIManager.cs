@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
 
     private void GetTargetScore(int targetScore)
     {
-        //targetScoreText.text = "Target : " + targetScore;
+        targetScoreText.text = "Go : " + targetScore;
     }
 
     public void NextLevelButton()

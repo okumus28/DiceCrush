@@ -205,7 +205,7 @@ public class Cell : MonoBehaviour
         //right Horizontal
         for (int i = x + 1; i < x + 4 && i < 9; i++)
         {
-            if (grid[i, y] == null || grid[i, y].value > 7 && grid[i, y].value == 0)
+            if (grid[i, y] == null || grid[i, y].value > 7 || grid[i, y].value == 0)
             {
                 break;
             }
@@ -219,7 +219,7 @@ public class Cell : MonoBehaviour
         //Left horizontal
         for (int i = x - 1; i > x - 4 && i >= 0; i--)
         {
-            if (grid[i, y] == null || grid[i, y].value > 7 && grid[i, y].value == 0)
+            if (grid[i, y] == null || grid[i, y].value > 7 || grid[i, y].value == 0)
             {
                 break;
             }
@@ -238,7 +238,7 @@ public class Cell : MonoBehaviour
         //top vertical
         for (int i = y + 1; i < y + 4 && i < 9; i++)
         {
-            if (grid[x, i] == null || grid[x, i].value > 7 && grid[x, i].value == 0)
+            if (grid[x, i] == null || grid[x, i].value > 7 || grid[x, i].value == 0)
             {
                 break;
             }
@@ -251,7 +251,7 @@ public class Cell : MonoBehaviour
         //bottom
         for (int i = y - 1; i > y - 4 && i >= 0; i--)
         {
-            if (grid[x, i] == null || grid[x, i].value > 7 && grid[x, i].value == 0)
+            if (grid[x, i] == null || grid[x, i].value > 7 || grid[x, i].value == 0)
             {
                 break;
             }

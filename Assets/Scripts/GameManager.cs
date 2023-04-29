@@ -93,7 +93,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (jellyCount <= 0 && score >= targetScore && obstacleCount <= 0 && clearCount <= 0)
         {
             OnLevelWin?.Invoke();
-            Debug.LogError("Game Winnn !!!");
+            Debug.Log("Game Winnn !!!");
         }
     }
 
@@ -101,7 +101,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         Cell[,] grid = Board.Instance.grid;
         int count = 0;
-        
+
         for (int i = 0; i < Board.Instance.transform.childCount; i++)
         {
             Cell cell = Board.Instance.transform.GetChild(i).GetComponent<Cell>();
@@ -140,7 +140,7 @@ public class GameManager : MonoSingleton<GameManager>
         if (moveCount <= 0 || count <= 0)
         {
             OnGameOver?.Invoke();
-            Debug.LogError("Hamle Kalmadı !!!");
+            Debug.Log("Hamle Kalmadı !!!");
         }
     }
 
