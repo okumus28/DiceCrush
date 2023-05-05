@@ -11,8 +11,27 @@ public class GameManager : MonoSingleton<GameManager>
     public int clearCount;
     public int obstacleCount;
     public int moveCount;
+    public int MoveCount
+    {
+        get { return moveCount; }
+        set 
+        {
+            moveCount = value;
+            OnMoveCountUpdate?.Invoke(moveCount);
+        }
+    }
     public int score;
     public int targetScore;
+    public int rewardCount;
+    //public int RewardCount
+    //{
+    //    get { return rewardCount; }
+    //    set 
+    //    { 
+    //        OnCanReward?.Invoke(rewardCount <= 2);
+    //        rewardCount = value;
+    //    }
+    //}
 
     public static event Action<int> OnMoveCountUpdate = delegate { };
     public static event Action<int> OnJellyCountUpdate = delegate { };
@@ -21,6 +40,7 @@ public class GameManager : MonoSingleton<GameManager>
     public static event Action<int , int> OnScoreUpdate = delegate { };
     public static event Action OnLevelWin = delegate { };
     public static event Action OnGameOver = delegate { };
+    public static event Action<bool> OnCanReward;
 
     private void OnEnable()
     {
@@ -137,11 +157,22 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
 
-        if (moveCount <= 0 || count <= 0)
+        if (count <= 0)
         {
+            OnGameOver?.Invoke();
+            Debug.Log("Boş Yer Kalmadı");
+            OnCanReward?.Invoke(false);
+            return;
+        }
+
+        if (moveCount <= 0)
+        {
+            rewardCount++;
+            OnCanReward?.Invoke(rewardCount <= 2);
             OnGameOver?.Invoke();
             Debug.Log("Hamle Kalmadı !!!");
         }
+
     }
 
     private void ResetLevel()

@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     private GameObject jellyQuest;
     private GameObject clearQuest;
     private GameObject obstacleQuest;
+
+    public Button watchAndResumeButton;
+
     
 
     private void OnEnable()
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
         LevelManager.OnTargetScore += GetTargetScore;
         GameManager.OnGameOver += GameOverPanel;
         GameManager.OnLevelWin += LevelCompletedPanel;
+        GameManager.OnCanReward += CanReward;
     }
 
     private void OnDisable()
@@ -55,6 +59,12 @@ public class UIManager : MonoBehaviour
         LevelManager.OnTargetScore -= GetTargetScore;
         GameManager.OnGameOver -= GameOverPanel;
         GameManager.OnLevelWin -= LevelCompletedPanel;
+        GameManager.OnCanReward -= CanReward;
+    }
+
+    private void Start()
+    {
+        watchAndResumeButton.onClick.AddListener(() => AdmobRewarded.Instance.ShowAd(WatchandResumeButton));
     }
     private void MoveCountUpdate(int count)
     {
@@ -126,6 +136,7 @@ public class UIManager : MonoBehaviour
 
     public void QuitButton()
     {
+        AdmobBanner.Instance.DestroyAd();
         SceneManager.LoadScene(0);
     }
 
@@ -137,5 +148,18 @@ public class UIManager : MonoBehaviour
     public void CreateQuest()
     {
         //GameObject quest = Instantiate(questUIPrefab, questPanel.transform);
+    }
+
+    public void WatchandResumeButton()
+    {
+        Debug.Log("RESUME BUTTON");
+        GameManager.Instance.MoveCount += 2;
+        gameOverPanel.SetActive(false);
+        //GameManager.Instance.rewardCount += 1;
+    }
+
+    private void CanReward(bool canReward)
+    {
+        watchAndResumeButton.interactable = canReward;
     }
 }

@@ -30,9 +30,15 @@ public class MainMenuScript : MonoBehaviour
         }        
     }
 
+    private void Start()
+    {
+        AdmobBanner.Instance.RequestBanner();
+    }
+
     void LoadLevel(int level)
     {
         PlayerPrefs.SetInt("loadedLevel" , level);
+        GameManager.Instance.rewardCount = 0;
         SceneManager.LoadScene(1);
     }
 }
